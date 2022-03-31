@@ -530,6 +530,158 @@ Frequency limit：10 times/s
 | chain_name | string |  |
 | confirmation | string | current confirmation quantity |
 
+## All Coins' Information
+
+> Response:
+
+```json
+{
+  "code": 0,
+  "message": "success",
+  "result": {
+      "BTC": {
+		  "asset_code": "BTC",
+		  "asset_name": "Bitcoin",
+		  "trade_status": 1, 
+		  "withdraw_deduct_status": 1,
+		  "withdraw_deduct_asset": "ZTB",
+		  "withdraw_deduct_rate": "0.8",
+		  "withdraw_deduct_fixed_amount": "10",
+		  "chain": [{
+			  "coin_id": "9794ac2a-7725-47c0-8f10-a7118df9b2f4",
+			  "chain_name": "Bitcoin",
+			  "regex": "^[13][a-km-zA-HJ-NP-Z1-9]{25,34}$",
+			  "recharge_status": 1,
+			  "withdraw_status": 1,
+			  "withdraw_min": "100",
+			  "withdraw_max": "100000",
+			  "withdraw_fee": "1",
+			  "withdraw_fee_percent": "0",
+			  "recharge_min": "10",
+			  "recharge_min_confirmation": 1
+		  }]
+	  }
+  }
+}
+```
+
+* **POST** `/api/v1/private/asset`
+
+<aside class="notice">
+Frequency limit：10 times/s
+</aside>
+
+### Response Parameters
+
+| **Field** | **Data type** | **Description**              |
+| ---- | ---- | ---- |
+| code | number | error code |
+| message | string | error message |
+| < result > | object | business data |
+| < coin > | object | coin's information |
+| asset_code | string | coin's code，the asset parameters involved in APIs such as withdrawals are all this field |
+| asset_name | string | coin's full name |
+| trade_status | number | trading status，1 means tradable |
+| withdraw_deduct_status | number | can other coins be used to deduct the withdrawal fee, 1 means can |
+| withdraw_deduct_asset | string | coin that can be used for withdrawal fee deduction, such as ZTB |
+| withdraw_deduct_rate | string | discounts for withdrawal fee deductions |
+| withdraw_deduct_fixed_amount | string | A fixed number of coin that can be used for withdrawal fee deduction. When this field is > 0, no matter how much amount for withdrawal, only this fixed value of withdrawal fee needs to be paid for deduction. |
+| < chain > | array | network |
+| chain_name | string | network name |
+| coin_id | string | id of the network |
+| regex | string | regex for address |
+| withdraw_status | number | withdrawal status，1 means can withdraw |
+| withdraw_min | string | minimum quantity for a single withdrawal |
+| withdraw_max | string | maximum quantity for a single withdrawal |
+| withdraw_fee | string | withdrawal base fee |
+| withdraw_fee_percent | string | extra fee for withdrawal |
+| recharge_status | number | recharge status，1 means can recharge |
+| recharge_min | string | minimum quantity for a single recharge |
+| recharge_min_confirmation | number | the minimum number of block confirmations for recharge to account |
+
+## Withdraw
+
+> Response:
+
+```json
+{
+  "code": 0,
+  "message": "success",
+  "result": {
+	  "id": 10086
+  }
+}
+```
+
+* **POST** `/api/v1/private/user/withdraws`
+
+<aside class="notice">
+Frequency limit：10 times/s
+</aside>
+
+### Request Parameters
+
+| **Parameters** | **Type** | **Mandatory** | **Description**    | **Value**      |
+| -------------- | -------- | ------------- | ------------------ | -------------- |
+| asset         | string   | Y             | coin | （eg: USDT） |
+| coin_id         | string   | N             | id of the network, recommended to be required | （eg: d16c9104-e058-4004-8b91-3999c37fbceb） |
+| amount       | string  | Y             |  |  |
+| address       | string  | Y             |  |  |
+| memo       | string  | N          | tag, secondary address identifier for coins like XRP,XMR etc. |  |
+| deduction       | boolean  | N          | whether the withdrawal fee is deducted by ZTB | (eg: true or false) |
+
+### Response Parameters
+
+| **Field** | **Data type** | **Description**              |
+| ---- | ---- | ---- |
+| code | number | error code |
+| message | string | error message |
+| < result > | array | business data |
+| id | number | id of the withdrawal record |
+
+## Withdrawal Cancellation
+
+> Response:
+
+```json
+{
+  "code": 0,
+  "message": "success",
+  "result": {
+	  "id": 10086,
+	  "asset": "USDT",
+	  "amount": "100",
+	  "coin_id": "d16c9104-e058-4004-8b91-3999c37fbceb",
+	  "status": "CANCEL"
+  }
+}
+```
+
+* **POST** `/api/v1/private/user/withdraws/cancel`
+
+<aside class="notice">
+Frequency limit：10 times/s
+</aside>
+
+### Request Parameters
+
+| **Parameters** | **Type** | **Mandatory** | **Description**    | **Value**      |
+| -------------- | -------- | ------------- | ------------------ | -------------- |
+| id         | number   | Y             | id of the withdrawal record |  |
+
+### Response Parameters
+
+| **Field** | **Data type** | **Description**              |
+| ---- | ---- | ---- |
+| code | number | error code |
+| message | string | error message |
+| < result > | array | business data |
+| id | number | id of the withdrawal record |
+| asset | string | coin |
+| amount | string |  |
+| coin_id | string | id of the network |
+| status | string |  |
+
 # Trading APIs
 
 ## Limit Order

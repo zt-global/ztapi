@@ -385,8 +385,8 @@ func Sign(secretKey string, params url.Values) string {
 | ---- | ---- | ---- |
 | code | number | 错误码 |
 | message | string | 错误信息 |
-| <result> | map | 响应数据 |
-| <asset> | object | 币种余额信息 |
+| < result > | map | 响应数据 |
+| < asset > | object | 币种余额信息 |
 | available | string | 可用余额 |
 | freeze | string | 交易冻结 |
 | other_freeze | string | 其他冻结 |
@@ -515,6 +515,158 @@ func Sign(secretKey string, params url.Values) string {
 | chain_name | string | 链 |
 | confirmation | string | 当前区块确认数 |
 
+## 全币种信息
+
+> Response:
+
+```json
+{
+  "code": 0,
+  "message": "success",
+  "result": {
+      "BTC": {
+		  "asset_code": "BTC",
+		  "asset_name": "Bitcoin",
+		  "trade_status": 1, 
+		  "withdraw_deduct_status": 1,
+		  "withdraw_deduct_asset": "ZTB",
+		  "withdraw_deduct_rate": "0.8",
+		  "withdraw_deduct_fixed_amount": "10",
+		  "chain": [{
+			  "coin_id": "9794ac2a-7725-47c0-8f10-a7118df9b2f4",
+			  "chain_name": "Bitcoin",
+			  "regex": "^[13][a-km-zA-HJ-NP-Z1-9]{25,34}$",
+			  "recharge_status": 1,
+			  "withdraw_status": 1,
+			  "withdraw_min": "100",
+			  "withdraw_max": "100000",
+			  "withdraw_fee": "1",
+			  "withdraw_fee_percent": "0",
+			  "recharge_min": "10",
+			  "recharge_min_confirmation": 1
+		  }]
+	  }
+  }
+}
+```
+
+* **POST** `/api/v1/private/asset`
+
+<aside class="notice">
+访问频率限制：10 次/秒
+</aside>
+
+### 响应参数
+
+| **字段** | **数据类型** | **说明**              |
+| ---- | ---- | ---- |
+| code | number | error code |
+| message | string | error message |
+| < result > | object | business data |
+| < coin > | object | 币种 |
+| asset_code | string | 币种code，提币等api涉及到的asset参数都是这个字段 |
+| asset_name | string | 币种全称 |
+| trade_status | number | 交易状态，1 表示可交易 |
+| withdraw_deduct_status | number | 提币手续费是否可用其他币种抵扣，1 表示可抵扣 |
+| withdraw_deduct_asset | string | 可用于手续费抵扣的币种，如ZTB |
+| withdraw_deduct_rate | string | 手续费抵扣折扣 |
+| withdraw_deduct_fixed_amount | string | 可用于手续费抵扣的币种固定数量，当这个字段>0时，无论提币多少，抵扣时都只需要支付这个固定值的手续费 |
+| < chain > | array | 提币网络 |
+| chain_name | string | 提币网络名 |
+| coin_id | string | 网络Id |
+| regex | string | 地址正则表达式 |
+| withdraw_status | number | 提币状态，1 可提币 |
+| withdraw_min | string | 单次提币最小数量 |
+| withdraw_max | string | 单次提币最大数量 |
+| withdraw_fee | string | 提币基础手续费 |
+| withdraw_fee_percent | string | 提币额外百分比手续费 |
+| recharge_status | number | 充值状态，1 可充值 |
+| recharge_min | string | 充值入账最小数量 |
+| recharge_min_confirmation | number | 充值到账最小区块确认数量 |
+
+## 提币
+
+> Response:
+
+```json
+{
+  "code": 0,
+  "message": "success",
+  "result": {
+	  "id": 10086
+  }
+}
+```
+
+* **POST** `/api/v1/private/user/withdraws`
+
+<aside class="notice">
+访问频率限制：10 次/秒
+</aside>
+
+### 请求参数
+
+| **参数** | **类型** | **是否必填** | **说明**    | **可选值**      |
+| -------------- | -------- | ------------- | ------------------ | -------------- |
+| asset         | string   | Y             | 提现币种 | （eg: USDT） |
+| coin_id         | string   | N             | 币种链网络的唯一id，某些只有一个链的币种可不填，建议必填 | （eg: d16c9104-e058-4004-8b91-3999c37fbceb） |
+| amount       | string  | Y             | 提币数量  |  |
+| address       | string  | Y             | 提币地址 |  |
+| memo       | string  | N          | 标签 |  |
+| deduction       | boolean  | N          | 提币手续费是否用ZTB抵扣，true是 |  |
+
+### 响应参数
+
+| **字段** | **数据类型** | **说明**              |
+| ---- | ---- | ---- |
+| code | number | error code |
+| message | string | error message |
+| < result > | array | business data |
+| id | number | 生成的提币记录id |
+
+## 提币取消
+
+> Response:
+
+```json
+{
+  "code": 0,
+  "message": "success",
+  "result": {
+	  "id": 10086,
+	  "asset": "USDT",
+	  "amount": "100",
+	  "coin_id": "d16c9104-e058-4004-8b91-3999c37fbceb",
+	  "status": "CANCEL"
+  }
+}
+```
+
+* **POST** `/api/v1/private/user/withdraws/cancel`
+
+<aside class="notice">
+访问频率限制：10 次/秒
+</aside>
+
+### 请求参数
+
+| **参数** | **类型** | **是否必填** | **说明**    | **可选值**      |
+| -------------- | -------- | ------------- | ------------------ | -------------- |
+| id         | number   | Y             | 提现记录id |  |
+
+### 响应参数
+
+| **字段** | **数据类型** | **说明**              |
+| ---- | ---- | ---- |
+| code | number | error code |
+| message | string | error message |
+| < result > | array | business data |
+| id | number | 生成的提币记录id |
+| asset | string | 提币币种 |
+| amount | string | 提币数量 |
+| coin_id | string | 链id |
+| status | string | 状态 |
+
 # 交易 APIs
 
 ## 限价挂单
@@ -567,7 +719,7 @@ func Sign(secretKey string, params url.Values) string {
 | ---- | ---- | ---- |
 | code | number | error code |
 | message | string | error message |
-| <result> | map | business data |
+| < result > | map | business data |
 | id | number |  |
 | ctime | number |  |
 | mtime | number |  |
@@ -633,7 +785,7 @@ func Sign(secretKey string, params url.Values) string {
 | ---- | ---- | ---- |
 | code | number | error code |
 | message | string | error message |
-| <result> | map | business data |
+| < result > | map | business data |
 | id | number |  |
 | ctime | number |  |
 | mtime | number |  |
@@ -698,7 +850,7 @@ func Sign(secretKey string, params url.Values) string {
 | ---- | ---- | ---- |
 | code | number | error code |
 | message | string | error message |
-| <result> | map | business data |
+| < result > | map | business data |
 | id | number |  |
 | ctime | number |  |
 | mtime | number |  |
@@ -756,7 +908,7 @@ func Sign(secretKey string, params url.Values) string {
 | ---- | ---- | ---- |
 | code | number | error code |
 | message | string | error message |
-| <result> | map | business data |
+| < result > | map | business data |
 | market | string |  |
 | order_id | number |  |
 | result | boolean | true 表示取消成功，false取消失败 |
@@ -818,11 +970,11 @@ func Sign(secretKey string, params url.Values) string {
 | ---- | ---- | ---- |
 | code | number | error code |
 | message | string | error message |
-| <result> | map | business data |
+| < result > | map | business data |
 | limit | number |  |
 | offset | number |  |
 | total | number |  |
-| <records> | array |  |
+| < records > | array |  |
 | id | number |  |
 | ctime | number |  |
 | mtime | number |  |
@@ -887,7 +1039,7 @@ func Sign(secretKey string, params url.Values) string {
 | ---- | ---- | ---- |
 | code | number | error code |
 | message | string | error message |
-| <result> | map | business data |
+| < result > | map | business data |
 | id | number |  |
 | ctime | number |  |
 | mtime | number |  |
@@ -978,10 +1130,10 @@ func Sign(secretKey string, params url.Values) string {
 | ---- | ---- | ---- |
 | code | number | error code |
 | message | string | error message |
-| <result> | map | business data |
+| < result > | map | business data |
 | limit | number |  |
 | offset | number |  |
-| <records> | array |  |
+| < records > | array |  |
 | id | number |  |
 | ctime | number |  |
 | ftime | number |  |
@@ -1043,7 +1195,7 @@ func Sign(secretKey string, params url.Values) string {
 | ---- | ---- | ---- |
 | code | number | error code |
 | message | string | error message |
-| <result> | map | business data |
+| < result > | map | business data |
 | id | number |  |
 | ctime | number |  |
 | ftime | number |  |
