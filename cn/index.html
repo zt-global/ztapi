@@ -383,6 +383,9 @@
                     <a href="#f8e1b73a7a" class="toc-h2 toc-link" data-title="全币种信息">全币种信息</a>
                   </li>
                   <li>
+                    <a href="#b3114995fd" class="toc-h2 toc-link" data-title="获取充值地址">获取充值地址</a>
+                  </li>
+                  <li>
                     <a href="#096be69702" class="toc-h2 toc-link" data-title="提币">提币</a>
                   </li>
                   <li>
@@ -1568,6 +1571,72 @@
 <td>充值到账最小区块确认数量</td>
 </tr>
 </tbody></table>
+<h2 id='b3114995fd'>获取充值地址</h2>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x00aa0b21c250c5ea96d48ff278e7baff843e4f15"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li><strong>POST</strong> <code>/api/v1/private/user/rechargeAddress</code></li>
+</ul>
+
+<aside class="notice">
+访问频率限制：10 次/秒
+</aside>
+<h3 id='1f9ac54b15-6'>请求参数</h3>
+<table><thead>
+<tr>
+<th><strong>参数</strong></th>
+<th><strong>类型</strong></th>
+<th><strong>是否必填</strong></th>
+<th><strong>说明</strong></th>
+<th><strong>可选值</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>asset</td>
+<td>string</td>
+<td>Y</td>
+<td>币种</td>
+<td>（eg: USDT）</td>
+</tr>
+<tr>
+<td>coin_id</td>
+<td>string</td>
+<td>Y</td>
+<td>币种链网络的唯一id</td>
+<td>（eg: d16c9104-e058-4004-8b91-3999c37fbceb）</td>
+</tr>
+</tbody></table>
+<h3 id='50faad05f3-10'>响应参数</h3>
+<table><thead>
+<tr>
+<th><strong>字段</strong></th>
+<th><strong>数据类型</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>code</td>
+<td>number</td>
+<td>error code</td>
+</tr>
+<tr>
+<td>message</td>
+<td>string</td>
+<td>error message</td>
+</tr>
+<tr>
+<td>result</td>
+<td>string</td>
+<td>address</td>
+</tr>
+</tbody></table>
 <h2 id='096be69702'>提币</h2>
 <blockquote>
 <p>Response:</p>
@@ -1587,7 +1656,7 @@
 <aside class="notice">
 访问频率限制：10 次/秒
 </aside>
-<h3 id='1f9ac54b15-6'>请求参数</h3>
+<h3 id='1f9ac54b15-7'>请求参数</h3>
 <table><thead>
 <tr>
 <th><strong>参数</strong></th>
@@ -1640,7 +1709,7 @@
 <td></td>
 </tr>
 </tbody></table>
-<h3 id='50faad05f3-10'>响应参数</h3>
+<h3 id='50faad05f3-11'>响应参数</h3>
 <table><thead>
 <tr>
 <th><strong>字段</strong></th>
@@ -1692,7 +1761,7 @@
 <aside class="notice">
 访问频率限制：10 次/秒
 </aside>
-<h3 id='1f9ac54b15-7'>请求参数</h3>
+<h3 id='1f9ac54b15-8'>请求参数</h3>
 <table><thead>
 <tr>
 <th><strong>参数</strong></th>
@@ -1710,7 +1779,7 @@
 <td></td>
 </tr>
 </tbody></table>
-<h3 id='50faad05f3-11'>响应参数</h3>
+<h3 id='50faad05f3-12'>响应参数</h3>
 <table><thead>
 <tr>
 <th><strong>字段</strong></th>
@@ -1793,7 +1862,7 @@
 <aside class="notice">
 访问频率限制：500 次/秒
 </aside>
-<h3 id='1f9ac54b15-8'>请求参数</h3>
+<h3 id='1f9ac54b15-9'>请求参数</h3>
 <table><thead>
 <tr>
 <th><strong>参数</strong></th>
@@ -1832,7 +1901,7 @@
 <td></td>
 </tr>
 </tbody></table>
-<h3 id='50faad05f3-12'>响应参数</h3>
+<h3 id='50faad05f3-13'>响应参数</h3>
 <table><thead>
 <tr>
 <th><strong>字段</strong></th>
@@ -1965,7 +2034,7 @@
 <aside class="notice">
 访问频率限制：500 次/秒
 </aside>
-<h3 id='1f9ac54b15-9'>请求参数</h3>
+<h3 id='1f9ac54b15-10'>请求参数</h3>
 <table><thead>
 <tr>
 <th><strong>参数</strong></th>
@@ -1997,7 +2066,7 @@
 <td></td>
 </tr>
 </tbody></table>
-<h3 id='50faad05f3-13'>响应参数</h3>
+<h3 id='50faad05f3-14'>响应参数</h3>
 <table><thead>
 <tr>
 <th><strong>字段</strong></th>
@@ -2130,7 +2199,7 @@
 <aside class="notice">
 访问频率限制：20 次/秒
 </aside>
-<h3 id='1f9ac54b15-10'>请求参数</h3>
+<h3 id='1f9ac54b15-11'>请求参数</h3>
 <table><thead>
 <tr>
 <th><strong>参数</strong></th>
@@ -2155,7 +2224,7 @@
 <td></td>
 </tr>
 </tbody></table>
-<h3 id='50faad05f3-14'>响应参数</h3>
+<h3 id='50faad05f3-15'>响应参数</h3>
 <table><thead>
 <tr>
 <th><strong>字段</strong></th>
@@ -2282,7 +2351,7 @@
 <aside class="notice">
 访问频率限制：10 次/秒
 </aside>
-<h3 id='1f9ac54b15-11'>请求参数</h3>
+<h3 id='1f9ac54b15-12'>请求参数</h3>
 <table><thead>
 <tr>
 <th><strong>参数</strong></th>
@@ -2300,7 +2369,7 @@
 <td>eg: [{&quot;market&quot;:&quot;BTC_USDT&quot;, &quot;order_id&quot;:456647},{&quot;market&quot;:&quot;ETH_USDT&quot;, &quot;order_id&quot;:456648}]</td>
 </tr>
 </tbody></table>
-<h3 id='50faad05f3-15'>响应参数</h3>
+<h3 id='50faad05f3-16'>响应参数</h3>
 <table><thead>
 <tr>
 <th><strong>字段</strong></th>
@@ -2381,7 +2450,7 @@
 <aside class="notice">
 访问频率限制：20 次/秒
 </aside>
-<h3 id='1f9ac54b15-12'>请求参数</h3>
+<h3 id='1f9ac54b15-13'>请求参数</h3>
 <table><thead>
 <tr>
 <th><strong>参数</strong></th>
@@ -2413,7 +2482,7 @@
 <td>不超过 100</td>
 </tr>
 </tbody></table>
-<h3 id='50faad05f3-16'>响应参数</h3>
+<h3 id='50faad05f3-17'>响应参数</h3>
 <table><thead>
 <tr>
 <th><strong>字段</strong></th>
@@ -2566,7 +2635,7 @@
 <aside class="notice">
 访问频率限制：20 次/秒
 </aside>
-<h3 id='1f9ac54b15-13'>请求参数</h3>
+<h3 id='1f9ac54b15-14'>请求参数</h3>
 <table><thead>
 <tr>
 <th><strong>参数</strong></th>
@@ -2591,7 +2660,7 @@
 <td></td>
 </tr>
 </tbody></table>
-<h3 id='50faad05f3-17'>响应参数</h3>
+<h3 id='50faad05f3-18'>响应参数</h3>
 <table><thead>
 <tr>
 <th><strong>字段</strong></th>
@@ -2746,7 +2815,7 @@
 <aside class="notice">
 访问频率限制：10 次/秒
 </aside>
-<h3 id='1f9ac54b15-14'>请求参数</h3>
+<h3 id='1f9ac54b15-15'>请求参数</h3>
 <table><thead>
 <tr>
 <th><strong>参数</strong></th>
@@ -2799,7 +2868,7 @@
 <td></td>
 </tr>
 </tbody></table>
-<h3 id='50faad05f3-18'>响应参数</h3>
+<h3 id='50faad05f3-19'>响应参数</h3>
 <table><thead>
 <tr>
 <th><strong>字段</strong></th>
@@ -2941,7 +3010,7 @@
 <aside class="notice">
 访问频率限制：10 次/秒
 </aside>
-<h3 id='1f9ac54b15-15'>请求参数</h3>
+<h3 id='1f9ac54b15-16'>请求参数</h3>
 <table><thead>
 <tr>
 <th><strong>参数</strong></th>
@@ -2959,7 +3028,7 @@
 <td></td>
 </tr>
 </tbody></table>
-<h3 id='50faad05f3-19'>响应参数</h3>
+<h3 id='50faad05f3-20'>响应参数</h3>
 <table><thead>
 <tr>
 <th><strong>字段</strong></th>
