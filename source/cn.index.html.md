@@ -584,6 +584,39 @@ func Sign(secretKey string, params url.Values) string {
 | recharge_min | string | 充值入账最小数量 |
 | recharge_min_confirmation | number | 充值到账最小区块确认数量 |
 
+## 获取充值地址
+
+> Response:
+
+```json
+{
+  "code": 0,
+  "message": "success",
+  "result": "0x00aa0b21c250c5ea96d48ff278e7baff843e4f15"
+}
+```
+
+* **POST** `/api/v1/private/user/rechargeAddress`
+
+<aside class="notice">
+访问频率限制：10 次/秒
+</aside>
+
+### 请求参数
+
+| **参数** | **类型** | **是否必填** | **说明**    | **可选值**      |
+| -------------- | -------- | ------------- | ------------------ | -------------- |
+| asset         | string   | Y             | 币种 | （eg: USDT） |
+| coin_id         | string   | Y             | 币种链网络的唯一id | （eg: d16c9104-e058-4004-8b91-3999c37fbceb） |
+
+### 响应参数
+
+| **字段** | **数据类型** | **说明**              |
+| ---- | ---- | ---- |
+| code | number | error code |
+| message | string | error message |
+| result | string | address |
+
 ## 提币
 
 > Response:

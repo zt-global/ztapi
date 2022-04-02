@@ -599,6 +599,39 @@ Frequency limit：10 times/s
 | recharge_min | string | minimum quantity for a single recharge |
 | recharge_min_confirmation | number | the minimum number of block confirmations for recharge to account |
 
+## Recharge Address
+
+> Response:
+
+```json
+{
+  "code": 0,
+  "message": "success",
+  "result": "0x00aa0b21c250c5ea96d48ff278e7baff843e4f15"
+}
+```
+
+* **POST** `/api/v1/private/user/rechargeAddress`
+
+<aside class="notice">
+Frequency limit：10 times/s
+</aside>
+
+### Request Parameters
+
+| **Parameters** | **Type** | **Mandatory** | **Description**    | **Value**      |
+| -------------- | -------- | ------------- | ------------------ | -------------- |
+| asset         | string   | Y             | coin | （eg: USDT） |
+| coin_id         | string   | Y             | id of the network, recommended to be required | （eg: d16c9104-e058-4004-8b91-3999c37fbceb） |
+
+### Response Parameters
+
+| **Field** | **Data type** | **Description**              |
+| ---- | ---- | ---- |
+| code | number | error code |
+| message | string | error message |
+| result | string | address |
+
 ## Withdraw
 
 > Response:
