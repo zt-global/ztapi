@@ -372,6 +372,9 @@
                     <a href="#all-coins-39-information" class="toc-h2 toc-link" data-title="All Coins' Information">All Coins' Information</a>
                   </li>
                   <li>
+                    <a href="#recharge-address" class="toc-h2 toc-link" data-title="Recharge Address">Recharge Address</a>
+                  </li>
+                  <li>
                     <a href="#withdraw" class="toc-h2 toc-link" data-title="Withdraw">Withdraw</a>
                   </li>
                   <li>
@@ -1570,6 +1573,72 @@ Frequency limit：10 times/s
 <td>the minimum number of block confirmations for recharge to account</td>
 </tr>
 </tbody></table>
+<h2 id='recharge-address'>Recharge Address</h2>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x00aa0b21c250c5ea96d48ff278e7baff843e4f15"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li><strong>POST</strong> <code>/api/v1/private/user/rechargeAddress</code></li>
+</ul>
+
+<aside class="notice">
+Frequency limit：10 times/s
+</aside>
+<h3 id='request-parameters-6'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th><strong>Parameters</strong></th>
+<th><strong>Type</strong></th>
+<th><strong>Mandatory</strong></th>
+<th><strong>Description</strong></th>
+<th><strong>Value</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>asset</td>
+<td>string</td>
+<td>Y</td>
+<td>coin</td>
+<td>（eg: USDT）</td>
+</tr>
+<tr>
+<td>coin_id</td>
+<td>string</td>
+<td>Y</td>
+<td>id of the network, recommended to be required</td>
+<td>（eg: d16c9104-e058-4004-8b91-3999c37fbceb）</td>
+</tr>
+</tbody></table>
+<h3 id='response-parameters-10'>Response Parameters</h3>
+<table><thead>
+<tr>
+<th><strong>Field</strong></th>
+<th><strong>Data type</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead><tbody>
+<tr>
+<td>code</td>
+<td>number</td>
+<td>error code</td>
+</tr>
+<tr>
+<td>message</td>
+<td>string</td>
+<td>error message</td>
+</tr>
+<tr>
+<td>result</td>
+<td>string</td>
+<td>address</td>
+</tr>
+</tbody></table>
 <h2 id='withdraw'>Withdraw</h2>
 <blockquote>
 <p>Response:</p>
@@ -1589,7 +1658,7 @@ Frequency limit：10 times/s
 <aside class="notice">
 Frequency limit：10 times/s
 </aside>
-<h3 id='request-parameters-6'>Request Parameters</h3>
+<h3 id='request-parameters-7'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th><strong>Parameters</strong></th>
@@ -1642,7 +1711,7 @@ Frequency limit：10 times/s
 <td>(eg: true or false)</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters-10'>Response Parameters</h3>
+<h3 id='response-parameters-11'>Response Parameters</h3>
 <table><thead>
 <tr>
 <th><strong>Field</strong></th>
@@ -1694,7 +1763,7 @@ Frequency limit：10 times/s
 <aside class="notice">
 Frequency limit：10 times/s
 </aside>
-<h3 id='request-parameters-7'>Request Parameters</h3>
+<h3 id='request-parameters-8'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th><strong>Parameters</strong></th>
@@ -1712,7 +1781,7 @@ Frequency limit：10 times/s
 <td></td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters-11'>Response Parameters</h3>
+<h3 id='response-parameters-12'>Response Parameters</h3>
 <table><thead>
 <tr>
 <th><strong>Field</strong></th>
@@ -1795,7 +1864,7 @@ Frequency limit：10 times/s
 <aside class="notice">
 Frequency limit：500 times/s
 </aside>
-<h3 id='request-parameters-8'>Request Parameters</h3>
+<h3 id='request-parameters-9'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th><strong>Parameters</strong></th>
@@ -1834,7 +1903,7 @@ Frequency limit：500 times/s
 <td></td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters-12'>Response Parameters</h3>
+<h3 id='response-parameters-13'>Response Parameters</h3>
 <table><thead>
 <tr>
 <th><strong>Field</strong></th>
@@ -1967,7 +2036,7 @@ Frequency limit：500 times/s
 <aside class="notice">
 Frequency limit：500 times/s
 </aside>
-<h3 id='request-parameters-9'>Request Parameters</h3>
+<h3 id='request-parameters-10'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th><strong>Parameters</strong></th>
@@ -1999,7 +2068,7 @@ Frequency limit：500 times/s
 <td></td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters-13'>Response Parameters</h3>
+<h3 id='response-parameters-14'>Response Parameters</h3>
 <table><thead>
 <tr>
 <th><strong>Field</strong></th>
@@ -2132,7 +2201,7 @@ Frequency limit：500 times/s
 <aside class="notice">
 Frequency limit：20 times/s
 </aside>
-<h3 id='request-parameters-10'>Request Parameters</h3>
+<h3 id='request-parameters-11'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th><strong>Parameters</strong></th>
@@ -2157,7 +2226,7 @@ Frequency limit：20 times/s
 <td></td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters-14'>Response Parameters</h3>
+<h3 id='response-parameters-15'>Response Parameters</h3>
 <table><thead>
 <tr>
 <th><strong>Field</strong></th>
@@ -2284,7 +2353,7 @@ Frequency limit：20 times/s
 <aside class="notice">
 Frequency limit：10 times/s
 </aside>
-<h3 id='request-parameters-11'>Request Parameters</h3>
+<h3 id='request-parameters-12'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th><strong>Parameters</strong></th>
@@ -2302,7 +2371,7 @@ Frequency limit：10 times/s
 <td>eg: [{&quot;market&quot;:&quot;BTC_USDT&quot;, &quot;order_id&quot;:456647},{&quot;market&quot;:&quot;ETH_USDT&quot;, &quot;order_id&quot;:456648}]</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters-15'>Response Parameters</h3>
+<h3 id='response-parameters-16'>Response Parameters</h3>
 <table><thead>
 <tr>
 <th><strong>Field</strong></th>
@@ -2383,7 +2452,7 @@ Frequency limit：10 times/s
 <aside class="notice">
 Frequency limit：20 times/s
 </aside>
-<h3 id='request-parameters-12'>Request Parameters</h3>
+<h3 id='request-parameters-13'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th><strong>Parameters</strong></th>
@@ -2415,7 +2484,7 @@ Frequency limit：20 times/s
 <td>no more than 100</td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters-16'>Response Parameters</h3>
+<h3 id='response-parameters-17'>Response Parameters</h3>
 <table><thead>
 <tr>
 <th><strong>Field</strong></th>
@@ -2568,7 +2637,7 @@ Frequency limit：20 times/s
 <aside class="notice">
 Frequency limit：20 times/s
 </aside>
-<h3 id='request-parameters-13'>Request Parameters</h3>
+<h3 id='request-parameters-14'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th><strong>Parameters</strong></th>
@@ -2593,7 +2662,7 @@ Frequency limit：20 times/s
 <td></td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters-17'>Response Parameters</h3>
+<h3 id='response-parameters-18'>Response Parameters</h3>
 <table><thead>
 <tr>
 <th><strong>Field</strong></th>
@@ -2748,7 +2817,7 @@ Frequency limit：20 times/s
 <aside class="notice">
 Frequency limit：10 times/s
 </aside>
-<h3 id='request-parameters-14'>Request Parameters</h3>
+<h3 id='request-parameters-15'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th><strong>Parameters</strong></th>
@@ -2801,7 +2870,7 @@ Frequency limit：10 times/s
 <td></td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters-18'>Response Parameters</h3>
+<h3 id='response-parameters-19'>Response Parameters</h3>
 <table><thead>
 <tr>
 <th><strong>Field</strong></th>
@@ -2938,7 +3007,7 @@ Frequency limit：10 times/s
 <aside class="notice">
 Frequency limit：10 times/s
 </aside>
-<h3 id='request-parameters-15'>Request Parameters</h3>
+<h3 id='request-parameters-16'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th><strong>Parameters</strong></th>
@@ -2956,7 +3025,7 @@ Frequency limit：10 times/s
 <td></td>
 </tr>
 </tbody></table>
-<h3 id='response-parameters-19'>Response Parameters</h3>
+<h3 id='response-parameters-20'>Response Parameters</h3>
 <table><thead>
 <tr>
 <th><strong>Field</strong></th>
